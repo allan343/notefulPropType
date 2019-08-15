@@ -6,6 +6,10 @@ import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
+import AddFolder from '../AddFolder/AddFolder';
+import AddFolderError from '../AddFolder/AddFolderError';
+import AddNote from '../AddNote/AddNote'
+import AddNoteError from '../AddNote/AddNoteError'
 import config from '../config';
 import './App.css';
 
@@ -23,12 +27,14 @@ class App extends Component {
             .then(([notesRes, foldersRes]) => {
                 if (!notesRes.ok)
                     return notesRes.json().then(e => Promise.reject(e));
-                if (!foldersRes.ok)
+                if (!foldersRes.ok){
                     return foldersRes.json().then(e => Promise.reject(e));
-
+                }
+                
                 return Promise.all([notesRes.json(), foldersRes.json()]);
             })
             .then(([notes, folders]) => {
+                console.log(folders);
                 this.setState({notes, folders});
             })
             .catch(error => {
@@ -54,8 +60,8 @@ class App extends Component {
                     />
                 ))}
                 <Route path="/note/:noteId" component={NotePageNav} />
-                <Route path="/add-folder" component={NotePageNav} />
-                <Route path="/add-note" component={NotePageNav} />
+               
+                {/*<Route path="/add-note" component={NotePageNav} />*/}
             </>
         );
     }
@@ -71,6 +77,16 @@ class App extends Component {
                         component={NoteListMain}
                     />
                 ))}
+                 <Route path="/add-folder" render={
+                    (routeProps)=>{return <AddFolderError><AddFolder {...routeProps}>
+                        </AddFolder></AddFolderError> 
+                    }} />
+
+<Route path="/add-note" render={
+                    (routeProps)=>{return <AddNoteError><AddNote {...routeProps}>
+                        </AddNote></AddNoteError> 
+                    }} />
+
                 <Route path="/note/:noteId" component={NotePageMain} />
             </>
         );

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
+import PropTypes from 'prop-types';
 import config from '../config'
+
 import './Note.css'
 
 export default class Note extends React.Component {
@@ -38,6 +40,16 @@ export default class Note extends React.Component {
   }
 
   render() {
+
+
+    Note.propTypes = {
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      modified: PropTypes.string.isRequired,
+      
+
+    }
+
     const { name, id, modified } = this.props
     return (
       <div className='Note'>

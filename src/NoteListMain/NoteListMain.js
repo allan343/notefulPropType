@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
+import PropTypes from 'prop-types';
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
 
@@ -16,6 +17,13 @@ export default class NoteListMain extends React.Component {
   static contextType = ApiContext
 
   render() {
+
+    NoteListMain.propTypes = {
+      key: PropTypes.string,
+      path: PropTypes.string
+
+    }
+
     const { folderId } = this.props.match.params
     const { notes=[] } = this.context
     const notesForFolder = getNotesForFolder(notes, folderId)
