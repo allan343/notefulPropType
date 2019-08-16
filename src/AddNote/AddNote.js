@@ -53,11 +53,7 @@ class AddNote extends React.Component {
     
 
     render(){
-      AddNote.propTypes = {
-        key: PropTypes.string,
-        path: PropTypes.string
-  
-      }
+   
      //throw "test";
         const nameError = this.validateName();
         const contentError = this.validateContent();
@@ -100,6 +96,12 @@ fetch(`http://localhost:9090/folders`,{method:"POST",body:JSON.stringify({name:e
 
 )
     }
+}
+
+AddNote.propTypes = {
+  key: PropTypes.string,
+  path: PropTypes.string
+
 }
 
 export default AddNote;

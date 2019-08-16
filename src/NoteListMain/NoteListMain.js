@@ -18,12 +18,6 @@ export default class NoteListMain extends React.Component {
 
   render() {
 
-    NoteListMain.propTypes = {
-      key: PropTypes.string,
-      path: PropTypes.string
-
-    }
-
     const { folderId } = this.props.match.params
     const { notes=[] } = this.context
     const notesForFolder = getNotesForFolder(notes, folderId)
@@ -55,4 +49,9 @@ export default class NoteListMain extends React.Component {
       </section>
     )
   }
+}
+NoteListMain.propTypes = {
+  key: PropTypes.string,
+  path: PropTypes.string
+
 }

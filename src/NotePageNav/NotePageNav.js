@@ -19,11 +19,6 @@ export default class NotePageNav extends React.Component {
 
   render() {
 
-    NotePageNav.propTypes = {
-      path: PropTypes.string
-
-    }
-
     const { notes, folders, } = this.context
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || {}
@@ -48,4 +43,9 @@ export default class NotePageNav extends React.Component {
       </div>
     )
   }
+}
+
+NotePageNav.propTypes = {
+  path: PropTypes.string
+
 }

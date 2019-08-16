@@ -10,13 +10,9 @@ import './NoteListNav.css'
 export default class NoteListNav extends React.Component {
   static contextType = ApiContext;
 
+
+
   render() {
-
-    NoteListNav.propTypes = {
-      key: PropTypes.string,
-      path: PropTypes.string
-
-    }
 
     const { folders=[], notes=[] } = this.context
     return (
@@ -51,4 +47,10 @@ export default class NoteListNav extends React.Component {
       </div>
     )
   }
+}
+
+NoteListNav.propTypes = {
+  key: PropTypes.string,
+  path: PropTypes.string
+
 }
