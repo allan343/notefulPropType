@@ -67,4 +67,11 @@ fetch(`http://localhost:9090/folders`,{method:"POST",body:JSON.stringify({name:e
     }
 }
 
+AddFolder.propTypes = {
+  key: PropTypes.string,
+  path: PropTypes.string
+
+}
+
+
 export default AddFolder;

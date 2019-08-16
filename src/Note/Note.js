@@ -41,13 +41,7 @@ export default class Note extends React.Component {
 
   render() {
 
-    Note.propTypes = {
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      modified: PropTypes.string.isRequired,
-      
-
-    }
+  
 
     const { name, id, modified } = this.props
     return (
@@ -78,4 +72,12 @@ export default class Note extends React.Component {
       </div>
     )
   }
+}
+
+Note.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  modified: PropTypes.string,
+  
+
 }
