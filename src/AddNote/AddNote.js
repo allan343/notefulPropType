@@ -80,6 +80,13 @@ fetch(`http://localhost:9090/folders`,{method:"POST",body:JSON.stringify({name:e
          {this.state.content.touched && (
   <ValidationError message={contentError} />
 )}
+<select>
+  <option value="grapefruit">Grapefruit</option>
+  <option value="lime">Lime</option>
+  <option value="coconut">Coconut</option>
+  <option value="mango">Mango</option>
+</select>
+
           <div className="registration__hint"></div>
        </div>
 
