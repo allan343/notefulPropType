@@ -40,8 +40,12 @@ class AddFolder extends React.Component {
         return(
 <form className="folder" onSubmit = {(event)=>{
 event.preventDefault();
-fetch(`http://localhost:9090/folders`,{method:"POST",body:JSON.stringify({name:event.target.name.value})})
+console.log(event.target.name.value);
+fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) .then(response => response.json())
+.then(responseJson => console.log(responseJson));
     
+
+
 }}> 
 <h2>Register</h2>
        <div className="folder__hint">* required field</div>  

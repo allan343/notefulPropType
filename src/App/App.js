@@ -8,6 +8,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
 import AddFolder from '../AddFolder/AddFolder';
 import AddFolderError from '../AddFolder/AddFolderError';
+import NoteFullError from '../NoteFullError';
 import AddNote from '../AddNote/AddNote'
 import AddNoteError from '../AddNote/AddNoteError'
 import config from '../config';
@@ -69,6 +70,7 @@ class App extends Component {
     renderMainRoutes() {
         return (
             <>
+            <NoteFullError>
                 {['/', '/folder/:folderId'].map(path => (
                     <Route
                         exact
@@ -88,6 +90,7 @@ class App extends Component {
                     }} />
 
                 <Route path="/note/:noteId" component={NotePageMain} />
+                </NoteFullError>
             </>
         );
     }
@@ -99,6 +102,8 @@ class App extends Component {
             deleteNote: this.handleDeleteNote
         };
         return (
+
+            <NoteFullError>
             <ApiContext.Provider value={value}>
                 <div className="App">
                     <nav className="App__nav">{this.renderNavRoutes()}</nav>
@@ -111,6 +116,7 @@ class App extends Component {
                     <main className="App__main">{this.renderMainRoutes()}</main>
                 </div>
             </ApiContext.Provider>
+            </NoteFullError>
         );
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ValidationError from '../ValidationError';
 import PropTypes from 'prop-types';
+import ApiContext from '../ApiContext';
 
 class AddNote extends React.Component {
     constructor(props) {
@@ -18,6 +19,8 @@ class AddNote extends React.Component {
             }
           };
       }
+
+      static contextType = ApiContext
 
       updateName(name) {
         this.setState({name: {value: name, touched: true}});
@@ -53,14 +56,15 @@ class AddNote extends React.Component {
     
 
     render(){
-   
+      const { folders=[] } = this.context;
      //throw "test";
         const nameError = this.validateName();
         const contentError = this.validateContent();
         return(
 <form className="folder" onSubmit = {(event)=>{
 event.preventDefault();
-fetch(`http://localhost:9090/folders`,{method:"POST",body:JSON.stringify({name:event.target.name.value})})
+fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value})}) .then(response => response.json())
+.then(responseJson => console.log(responseJson));
     
 }}> 
 <h2>Register</h2>
@@ -80,11 +84,19 @@ fetch(`http://localhost:9090/folders`,{method:"POST",body:JSON.stringify({name:e
          {this.state.content.touched && (
   <ValidationError message={contentError} />
 )}
-<select>
+<select name="folderId">
+  
+  
+  {
+    
+    folders.map((folder)=>{
+     return <option key={folder.name} value={folder.id}>{folder.name}</option>
+    })
+    /*
   <option value="grapefruit">Grapefruit</option>
   <option value="lime">Lime</option>
   <option value="coconut">Coconut</option>
-  <option value="mango">Mango</option>
+  <option value="mango">Mango</option>*/}
 </select>
 
           <div className="registration__hint"></div>
