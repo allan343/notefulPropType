@@ -41,8 +41,26 @@ class AddFolder extends React.Component {
 <form className="folder" onSubmit = {(event)=>{
 event.preventDefault();
 console.log(event.target.name.value);
+
+
+/*
 fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) .then(response => response.json())
-.then(responseJson => console.log(responseJson));
+.then(responseJson => console.log(responseJson));*/
+
+  fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) 
+  .then(response => response.json())
+  .then(responseJson => {this.setState({
+    error: null
+         });
+        }
+      ).catch(err => {
+        this.setState({
+          error: err.message
+        });
+      });
+      
+
+
     
 
 

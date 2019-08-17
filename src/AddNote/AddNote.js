@@ -45,7 +45,7 @@ class AddNote extends React.Component {
       }
 
       validateContent(fieldValue) {
-        const name = this.state.name.value.trim();
+        const name = this.state.content.value.trim();
         if (name.length === 0) {
           return 'Name is required';
         } else if (name.length < 3) {
@@ -64,7 +64,15 @@ class AddNote extends React.Component {
 <form className="folder" onSubmit = {(event)=>{
 event.preventDefault();
 fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value})}) .then(response => response.json())
-.then(responseJson => console.log(responseJson));
+.then(responseJson => console.log(responseJson)).then(responseJson => {this.setState({
+  error: null
+       });
+      }
+    ).catch(err => {
+      this.setState({
+        error: err.message
+      });
+    });;
     
 }}> 
 <h2>Register</h2>
