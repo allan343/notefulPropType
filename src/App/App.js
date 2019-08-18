@@ -50,8 +50,10 @@ class App extends Component {
     };
 
     handleAddFolder = folderName => {
+        this.state.folders.push(folderName);
+      
         this.setState({
-            folders: this.state.folders.push(folderName)
+            folders: this.state.folders
         });
     };
 
