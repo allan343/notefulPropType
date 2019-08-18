@@ -69,6 +69,7 @@ fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'
        });
       }
     ).catch(err => {
+      
       this.setState({
         error: err.message
       });

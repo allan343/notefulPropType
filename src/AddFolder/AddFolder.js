@@ -1,8 +1,11 @@
 import React from 'react';
 import ValidationError from '../ValidationError';
 import PropTypes from 'prop-types';
+import ApiContext from '../ApiContext'
 
 class AddFolder extends React.Component {
+ 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +16,7 @@ class AddFolder extends React.Component {
           };
       }
 
+      static contextType = ApiContext;
       updateName(name) {
         this.setState({name: {value: name, touched: true}});
       }
@@ -59,8 +63,8 @@ fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/jso
         });
       });
       
-
-
+this.context.addFolder(event.target.name.value);
+      this.props.history.goBack()
     
 
 
