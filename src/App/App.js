@@ -35,7 +35,7 @@ class App extends Component {
                 return Promise.all([notesRes.json(), foldersRes.json()]);
             })
             .then(([notes, folders]) => {
-                console.log(folders);
+                console.log(notes);
                 this.setState({notes, folders});
             })
             .catch(error => {
@@ -49,9 +49,14 @@ class App extends Component {
         });
     };
 
-    handleAddFolder = folderName => {
-        this.state.folders.push(folderName);
-      
+    handleAddFolder = (folderName,folderId) => {
+        this.state.folders.push({name:folderName,id:folderId});
+        this.setState({
+            folders: this.state.folders
+        });
+    };
+    handleAddNote = (noteName,noteId,content,folderId,) => {
+        this.state.folders.push({name:folderName,id:folderId});
         this.setState({
             folders: this.state.folders
         });
@@ -108,7 +113,8 @@ class App extends Component {
             notes: this.state.notes,
             folders: this.state.folders,
             deleteNote: this.handleDeleteNote,
-            addFolder: this.handleAddFolder
+            addFolder: this.handleAddFolder,
+            addNote: this.handleAddNote
         };
         return (
 

@@ -53,7 +53,15 @@ fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/jso
 
   fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) 
   .then(response => response.json())
-  .then(responseJson => {this.setState({
+  .then(responseJson => {
+    
+    if(responseJson.id && responseJson.name){
+      this.context.addFolder(responseJson.name,responseJson.id);
+      this.props.history.goBack()
+    }
+    
+    
+    this.setState({
     error: null
          });
         }
@@ -62,10 +70,7 @@ fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/jso
           error: err.message
         });
       });
-      
-this.context.addFolder(event.target.name.value);
-      this.props.history.goBack()
-    
+
 
 
 }}> 
