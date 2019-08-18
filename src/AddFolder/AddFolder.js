@@ -34,11 +34,7 @@ class AddFolder extends React.Component {
 
     render(){
 
-      AddFolder.propTypes = {
-        key: PropTypes.string,
-        path: PropTypes.string
-  
-      }
+     
      //throw "test";
         const nameError = this.validateName();
         return(
@@ -54,9 +50,12 @@ fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/jso
   fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) 
   .then(response => response.json())
   .then(responseJson => {
+    console.log("folder reaching");
     
     if(responseJson.id && responseJson.name){
+      console.log("addingfolder");
       this.context.addFolder(responseJson.name,responseJson.id);
+      console.log("addedfolder");
       this.props.history.goBack()
     }
     

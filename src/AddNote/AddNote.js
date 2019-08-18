@@ -3,6 +3,7 @@ import ValidationError from '../ValidationError';
 import PropTypes from 'prop-types';
 import ApiContext from '../ApiContext';
 
+
 class AddNote extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,7 @@ class AddNote extends React.Component {
           };
       }
 
-      static contextType = ApiContext
+      static contextType = ApiContext;
 
       updateName(name) {
         this.setState({name: {value: name, touched: true}});
@@ -64,7 +65,19 @@ class AddNote extends React.Component {
 <form className="folder" onSubmit = {(event)=>{
 event.preventDefault();
 fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value})}) .then(response => response.json())
-.then(responseJson => console.log(responseJson)).then(responseJson => {this.setState({
+.then(responseJson =>responseJson.json())
+.then(responseJson => {
+  console.log("is it even reachin here?");
+ // console.log("note response is " + responseJson.json());
+  if(responseJson.id && responseJson.name && responseJson.folderId && responseJson.content){
+    console.log("addingnote");
+    this.context.addNote(responseJson.name,responseJson.id, responseJson.folderId, responseJson.content);
+    console.log("addednote");
+    this.props.history.goBack();
+  }
+  
+  
+  this.setState({
   error: null
        });
       }

@@ -50,15 +50,19 @@ class App extends Component {
     };
 
     handleAddFolder = (folderName,folderId) => {
+        console.log("folder here");
         this.state.folders.push({name:folderName,id:folderId});
         this.setState({
             folders: this.state.folders
         });
     };
-    handleAddNote = (noteName,noteId,content,folderId,) => {
-        this.state.folders.push({name:folderName,id:folderId});
+    
+    
+    handleAddNote = (noteName,noteId,folderId,content) => {
+        console.log("note here");
+        this.state.notes.push({name:noteName,id:noteId, content: content, folderId: folderId});
         this.setState({
-            folders: this.state.folders
+            notes: this.state.notes
         });
     };
 
