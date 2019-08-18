@@ -5,7 +5,6 @@ import ApiContext from '../ApiContext'
 
 class AddFolder extends React.Component {
  
-
     constructor(props) {
         super(props);
         this.state = {
@@ -29,12 +28,7 @@ class AddFolder extends React.Component {
           return 'Name must be at least 3 characters long';
         }
       }
-
-    
-
     render(){
-
-     
      //throw "test";
         const nameError = this.validateName();
         return(
@@ -51,7 +45,6 @@ fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/jso
   .then(response => response.json())
   .then(responseJson => {
     console.log("folder reaching");
-    
     if(responseJson.id && responseJson.name){
       console.log("addingfolder");
       this.context.addFolder(responseJson.name,responseJson.id);

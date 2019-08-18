@@ -3,8 +3,8 @@ import ValidationError from '../ValidationError';
 import PropTypes from 'prop-types';
 import ApiContext from '../ApiContext';
 
-
 class AddNote extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +13,6 @@ class AddNote extends React.Component {
               touched: false
             },
          
-       
             content: {
               value: '',
               touched: false
@@ -40,16 +39,11 @@ class AddNote extends React.Component {
         }
       }
 
-
-      updateContent(name) {
-        this.setState({name: {value: name, touched: true}});
-      }
-
       validateContent(fieldValue) {
-        const name = this.state.content.value.trim();
-        if (name.length === 0) {
+        const content = this.state.content.value.trim();
+        if (content.length === 0) {
           return 'Name is required';
-        } else if (name.length < 3) {
+        } else if (content.length < 3) {
           return 'Name must be at least 3 characters long';
         }
       }
@@ -62,10 +56,12 @@ class AddNote extends React.Component {
         const nameError = this.validateName();
         const contentError = this.validateContent();
         return(
+
 <form className="folder" onSubmit = {(event)=>{
 event.preventDefault();
-fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value})}) .then(response => response.json())
-.then(responseJson =>responseJson.json())
+fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value})})
+.then(responseJson =>responseJson.json()
+)
 .then(responseJson => {
   console.log("is it even reachin here?");
  // console.log("note response is " + responseJson.json());
@@ -86,9 +82,10 @@ fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'
       this.setState({
         error: err.message
       });
-    });;
+    });
     
 }}> 
+
 <h2>Register</h2>
        <div className="folder__hint">* required field</div>  
        <div className="form-group">
@@ -114,16 +111,10 @@ fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'
     folders.map((folder)=>{
      return <option key={folder.name} value={folder.id}>{folder.name}</option>
     })
-    /*
-  <option value="grapefruit">Grapefruit</option>
-  <option value="lime">Lime</option>
-  <option value="coconut">Coconut</option>
-  <option value="mango">Mango</option>*/}
+    }
 </select>
-
           <div className="registration__hint"></div>
        </div>
-
 
         <div className="folder__button__group">
         <button type="reset" className="folder__button">
