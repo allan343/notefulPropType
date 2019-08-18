@@ -58,16 +58,21 @@ class AddNote extends React.Component {
         return(
 
 <form className="folder" onSubmit = {(event)=>{
+
 event.preventDefault();
-fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value})})
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+console.log("date is " + date);
+
+fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value, modified: date})})
 .then(responseJson =>responseJson.json()
 )
 .then(responseJson => {
   console.log("is it even reachin here?");
  // console.log("note response is " + responseJson.json());
   if(responseJson.id && responseJson.name && responseJson.folderId && responseJson.content){
-    console.log("addingnote");
-    this.context.addNote(responseJson.name,responseJson.id, responseJson.folderId, responseJson.content);
+    console.log("addingnote " + responseJson.modified);
+    this.context.addNote(responseJson.name,responseJson.id, responseJson.folderId, responseJson.content, responseJson.modified);
     console.log("addednote");
     this.props.history.goBack();
   }

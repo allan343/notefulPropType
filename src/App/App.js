@@ -58,9 +58,9 @@ class App extends Component {
     };
     
     
-    handleAddNote = (noteName,noteId,folderId,content) => {
-        console.log("note here");
-        this.state.notes.push({name:noteName,id:noteId, content: content, folderId: folderId});
+    handleAddNote = (noteName,noteId,folderId,content, modified) => {
+        console.log("note here" + modified);
+        this.state.notes.push({name:noteName,id:noteId, content: content, folderId: folderId, modified: modified});
         this.setState({
             notes: this.state.notes
         });
