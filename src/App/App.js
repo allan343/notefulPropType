@@ -35,6 +35,7 @@ class App extends Component {
                 return Promise.all([notesRes.json(), foldersRes.json()]);
             })
             .then(([notes, folders]) => {
+                console.log(folders);
                 console.log(notes);
                 this.setState({notes, folders});
             })
@@ -59,10 +60,22 @@ class App extends Component {
     
     
     handleAddNote = (noteName,noteId,folderId,content, modified) => {
-        console.log("note here" + modified);
-        this.state.notes.push({name:noteName,id:noteId, content: content, folderId: folderId, modified: modified});
-        this.setState({
-            notes: this.state.notes
+        console.log("note here " + modified);
+        console.log("folderId is " + folderId);
+        console.log("noteId is " + noteId);
+        console.log("content is " + content);
+        console.log("notename is " + noteName);
+        var testarray=[];
+        for(var i=0;i<this.state.notes.length;i++){
+            testarray[i]=this.state.notes[i];
+        }
+       // this.state.notes.push({name:noteName,id:noteId, content: content, folderId: folderId, modified: modified});
+      
+       testarray.push({name:noteName,id:noteId, content: content, folderId: folderId, modified: modified});
+       console.log("state notes is ", this.state.notes);
+       console.log("test array is ", testarray);
+       this.setState({
+            notes: testarray
         });
     };
 

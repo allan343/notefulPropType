@@ -41,7 +41,7 @@ console.log(event.target.name.value);
 fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) .then(response => response.json())
 .then(responseJson => console.log(responseJson));*/
 
-  fetch(`http://localhost:9090/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) 
+  fetch(`http://localhost:8000/folders`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value})}) 
   .then(response => response.json())
   .then(responseJson => {
     console.log("folder reaching");

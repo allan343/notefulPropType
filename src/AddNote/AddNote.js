@@ -64,13 +64,15 @@ var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 console.log("date is " + date);
 
-fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderId:event.target.folderId.value, modified: date})})
+fetch(`http://localhost:8000/notes`,{headers:{'content-type': 'application/json'},method:"POST",body:JSON.stringify({name:event.target.name.value, content:event.target.content.value, folderid:event.target.folderId.value, modified: date})})
 .then(responseJson =>responseJson.json()
 )
 .then(responseJson => {
   console.log("is it even reachin here?");
  // console.log("note response is " + responseJson.json());
-  if(responseJson.id && responseJson.name && responseJson.folderId && responseJson.content){
+ 
+  if(responseJson.id && responseJson.name && responseJson.folderId && responseJson.content)
+ {
     console.log("addingnote " + responseJson.modified);
     this.context.addNote(responseJson.name,responseJson.id, responseJson.folderId, responseJson.content, responseJson.modified);
     console.log("addednote");
@@ -83,7 +85,7 @@ fetch(`http://localhost:9090/notes`,{headers:{'content-type': 'application/json'
        });
       }
     ).catch(err => {
-      
+      console.log("it's not working"+ err);
       this.setState({
         error: err.message
       });
